@@ -19,7 +19,7 @@ aspect_ratio = int(input("Enter the aspect ratio of the tire: "))
 tire_diameter = int(input("Enter the diameter os the wheel in inches: "))
 pi = math.pi
 today = datetime.now()
-print(today)
+print(f"{today: %Y-%m-%d}")
 #Calculates tire volume
 def calculate_tire_volume ():
     tire_volume = ((pi * tire_width ** 2 * aspect_ratio) * (tire_width * aspect_ratio + 2540 * tire_diameter))/10000000000
@@ -29,3 +29,5 @@ def calculate_tire_volume ():
 calculate_tire_volume()
 
 #Writing in text file
+with open("volumes.txt","at") as volumes_file:
+    print(f"{today : %Y-%m-%d}, {tire_width}, {aspect_ratio}, {tire_diameter}", file=volumes_file)
