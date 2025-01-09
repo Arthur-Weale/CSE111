@@ -23,18 +23,27 @@ today = datetime.now()
 #Calculates tire volume
 def calculate_tire_volume ():
     tire_volume = ((pie * tire_width ** 2 * aspect_ratio) * (tire_width * aspect_ratio + 2540 * tire_diameter))/10000000000
-    print(f'The approximate volume is {tire_volume:.2f}')
+    print(f'The approximate volume is {tire_volume:.2f} litres')
     return tire_volume
 
 calculate_tire_volume()
 
 buy_tires = input(f"Would you like to buy the 4 tires type {tire_width}/{aspect_ratio}-{tire_diameter}: ")
 
+#Reinitislise the phone number
+phone_number = ""
+
 if buy_tires.lower() == "yes":
     phone_number = input("Please input your phone number: ")
-else:
+    
+    while len(phone_number) != 10:
+        print("Your phone number is not either exceeds the number of digits or is not enough")
+        phone_number = input("Please input your phone number: ")
+        print("Thank you for the purchase, the receipt will be sent to you message inbox.")
+elif buy_tires.lower() == "no":
     print("Thank you")
 
 #Writing in text file
 with open("volumes.txt","at") as volumes_file:
     print(f"{today : %Y-%m-%d}, {tire_width}, {aspect_ratio}, {tire_diameter}, {phone_number}", file=volumes_file)
+    print("Data successfully written to volumes.txt.")  # Confirmation message
