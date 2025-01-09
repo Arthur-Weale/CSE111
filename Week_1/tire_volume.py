@@ -31,7 +31,7 @@ calculate_tire_volume()
 buy_tires = input(f"Would you like to buy the 4 tires type {tire_width}/{aspect_ratio}-{tire_diameter}: ")
 
 if buy_tires.lower() == "yes":
-    phone_number = int(input("Please input your phone number: "))
+    phone_number = input("Please input your phone number: ")
 else:
     print("Thank you")
 
