@@ -20,6 +20,7 @@ tire_diameter = int(input("Enter the diameter os the wheel in inches (ex 15): ")
 pie = math.pi
 today = datetime.now()
 
+
 #Calculates tire volume
 def calculate_tire_volume ():
     tire_volume = ((pie * tire_width ** 2 * aspect_ratio) * (tire_width * aspect_ratio + 2540 * tire_diameter))/10000000000
@@ -43,7 +44,8 @@ if buy_tires.lower() == "yes":
 elif buy_tires.lower() == "no":
     print("Thank you")
 
+tire_volume = calculate_tire_volume()
 #Writing in text file
 with open("volumes.txt","at") as volumes_file:
-    print(f"{today : %Y-%m-%d}, {tire_width}, {aspect_ratio}, {tire_diameter}, {phone_number}", file=volumes_file)
+    print(f"{today : %Y-%m-%d}, {tire_width}, {aspect_ratio}, {tire_diameter},  {tire_volume:.2f},{phone_number}", file=volumes_file)
     print("Data successfully written to volumes.txt.")  # Confirmation message
