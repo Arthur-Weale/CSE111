@@ -1,4 +1,12 @@
-
+"""
+==========================================
+    Program: Sentences
+    Author: Arthur Weale
+    Date: 1-15-2025
+    Description:
+        A Python program that generates simple English sentences.
+==========================================
+"""
 import random
 
 def main ():
@@ -75,11 +83,28 @@ def get_verb (quantity, tense):
     words = random.choice(words)
     return words
 
+def get_prepositional():
+    prepositions = [
+            "about", "above", "across", "after", "along",
+            "around", "at", "before", "behind", "below",
+            "beyond", "by", "despite", "except", "for",
+            "from", "in", "into", "near", "of",
+            "off", "on", "onto", "out", "over",
+            "past", "to", "under", "with", "without"]
+    random_preposition = random.choice(prepositions)
+    return random_preposition
+
+def get_prepositional_phrase(quantity):
+    determiner = get_determiner(quantity)
+    noun = get_noun(quantity)
+    preposition = get_prepositional()
+    return(f"{preposition} {determiner} {noun}")
+
 def make_sentence(quantity, tense):
     determiner = get_determiner(quantity)
     noun = get_noun(quantity)
     verb = get_verb(quantity,tense)
-    return(f"{determiner} {noun} {verb}")
+    return(f"{str.capitalize(determiner)} {noun} {verb} {get_prepositional_phrase(quantity)} {get_prepositional_phrase(quantity)}.")
 
 
 main()
