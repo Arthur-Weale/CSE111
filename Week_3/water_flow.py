@@ -4,7 +4,7 @@
     Author: Arthur Weale
     Date: 1-15-2025
     Description:
-        A Python program that generates simple English sentences.
+        A Python Test Driven Development assignment.
 ==========================================
 """
 
