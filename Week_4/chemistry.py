@@ -1,3 +1,13 @@
+"""
+==========================================
+    Program: Chemistry
+    Author: Arthur Weale
+    Date: 1-31-2025
+    Description:
+        A Python program that gets chemical formula and returns the number of moles and molar mass.
+==========================================
+"""
+
 
 from formula import parse_formula
 
@@ -20,13 +30,16 @@ def main ():
     
     get_periodic_table = make_periodic_table()
     chemical_formular = input("Enter chemical formula (e.g...H20): ")
-    mass = float(input(f"Enter mass of {chemical_formular}(in grams): "))
+    formula_name = get_formula_name(chemical_formular,known_molecules_dict)
+    mass = float(input(f"Enter mass of {formula_name} (in grams): "))
 
+    
     symbol_quantity = parse_formula(chemical_formular, get_periodic_table)
     get_molar_mass = compute_molar_mass(symbol_quantity, get_periodic_table)
     number_of_moles = mass / get_molar_mass
     print(f"{get_molar_mass} grams/mole")
-    print(f"{number_of_moles} moles")
+    print(f"{number_of_moles:.5f} moles")
+    print(formula_name)
     return number_of_moles
 
     # for list_item in get_periodic_table:
@@ -184,6 +197,49 @@ def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
         molar_mass += running_molar_mass
 
     return molar_mass
+
+
+known_molecules_dict = {
+    "Al2O3": "aluminum oxide",
+    "CH3OH": "methanol",
+    "C2H6O": "ethanol",
+    "C2H5OH": "ethanol",
+    "C3H8O": "isopropyl alcohol",
+    "C3H8": "propane",
+    "C4H10": "butane",
+    "C6H6": "benzene",
+    "C6H14": "hexane",
+    "C8H18": "octane",
+    "CH3(CH2)6CH3": "octane",
+    "C13H18O2": "ibuprofen",
+    "C13H16N2O2": "melatonin",
+    "Fe2O3": "iron oxide",
+    "FeS2": "iron pyrite",
+    "H2O": "water"
+}
+
+def get_formula_name(chemical_formula, known_molecules_dict):
+    """Try to find formula in the known_molecules_dict.
+    If formula is in the known_molecules_dict, return
+    the name of the chemical formula; otherwise return
+    "unknown compound".
+    Parameters
+        formula is a string that contains a chemical formula
+        known_molecules_dict is a dictionary that contains
+            known chemical formulas and their names
+    Return: the name of a chemical formula
+    """
+    # for key, value in known_molecules_dict.items():
+    #     if key in known_molecules_dict:
+    #         print(key)
+    #         print(value)
+    #         return value
+    #     else:
+    #         return "Unknown Compound"
+    if chemical_formula in known_molecules_dict:
+        return known_molecules_dict[chemical_formula]
+    else:
+        return "Uknown Compound"
 
 if __name__ == '__main__':
     main()
