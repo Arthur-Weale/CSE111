@@ -18,7 +18,7 @@ csv_log_file = 'tradelog.csv'
 
 def csv_check():
     file_exist = os.path.exists(csv_log_file)
-    header = ["Trade Date", "Instrument","Position", "Entry Price", "Exit Price", "Stop Loss","Take Profit", "Lot Size", "Status"]
+    header = ["Trade Date", "Instrument","Position", "Entry Price", "Exit Price", "Stop Loss","Take Profit", "Lot Size","Result", "Status"]
     with open(csv_log_file , 'a', newline='') as file:
         write = csv.writer(file)
 
@@ -72,6 +72,13 @@ def populate_ui(main_frame):
     lotsize_label = tk.Label(main_frame, text='Lot Size')
     lotsize_label.configure(bg='#16213e', fg='white')
     lotsize_entry = tk.Entry(main_frame)
+
+    result_label = tk.Label(main_frame, text='Result')
+    result_label.configure(bg='#16213e', fg='white')
+    res_option = ['Win', 'Loss', 'Breakeven']
+    res_variable = tk.StringVar(main_frame)
+    result_entry = ttk.Combobox(main_frame, textvariable= res_variable, state='readonly', values=res_option, width=17)
+    res_variable.set(res_option[0])
     
     status_label = tk.Label(main_frame, text='Status')
     status_label.configure(bg='#16213e', fg='white')
@@ -95,7 +102,6 @@ def populate_ui(main_frame):
     instrument_label.grid(column=0, row=1, sticky='w')
     instrument_entry.grid(column=1, row=1, columnspan=50, padx=10, pady=10)
 
-    
     position_label.grid(column=0, row=2, sticky='w')
     position_entry.grid(column=1, row=2, padx=10, pady=10)
 
@@ -111,14 +117,17 @@ def populate_ui(main_frame):
     lotsize_label.grid(column=0, row=6, sticky='w')
     lotsize_entry.grid(column=1, row=6, columnspan=50, padx=10, pady=10)
 
-    take_profit_label.grid(column=0, row=7, sticky='w')
-    take_profit_entry.grid(column=1, row=7, columnspan=50, padx=10, pady=10)
+    result_label.grid(column=0, row=7, sticky='w')
+    result_entry.grid(column=1, row=7, padx=10, pady=10)
 
-    status_label.grid(column=0, row=8, sticky='w')
-    status_display.grid(column=1, row=8, columnspan=50, padx=10, pady=10)
+    take_profit_label.grid(column=0, row=8, sticky='w')
+    take_profit_entry.grid(column=1, row=8, columnspan=50, padx=10, pady=10)
 
-    save_button.grid(column=0, row=9, padx=10, pady=10)
-    clear_button.grid(column=1, row=9, padx=10, pady=10)
+    status_label.grid(column=0, row=9, sticky='w')
+    status_display.grid(column=1, row=9, columnspan=50, padx=10, pady=10)
+
+    save_button.grid(column=0, row=10, padx=10, pady=10)
+    clear_button.grid(column=1, row=10, padx=10, pady=10)
 
 
     def save_trade_to_csv():
@@ -131,6 +140,7 @@ def populate_ui(main_frame):
             stoploss_entry_str = stoploss_entry.get()
             take_profit_entry_str = take_profit_entry.get()
             lotsize_entry_str = lotsize_entry.get()
+            result_entry_str = result_entry.get()
 
             entry_date = trade_date_entry_str
             entry_price = float(entry_price_entry_str)
@@ -153,7 +163,9 @@ def populate_ui(main_frame):
                 "Stop Loss": stoploss,
                 "Take Profit": take_profit,
                 "Lot Size" : lotsize,
-                "Status": status_display.cget('text')
+                "Result": result_entry_str,
+                "Status": status_display.cget('text'),
+
             }
 
             print(trade_log_dict)
@@ -161,6 +173,43 @@ def populate_ui(main_frame):
             with open(csv_log_file, 'a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow(trade_log_dict.values())
+
+    """
+    
+    save_trade_to_csv(): Saves the trade data entered by the user to a CSV file.
+    load_trades_from_csv(): Loads trade data from the CSV file to display in the GUI.
+    calculate_profit_loss(): Calculates the profit or loss for each trade based on entry and exit prices.
+    display_trade_history(): Displays the trade history in the GUI.
+    filter_trades(): Allows the user to filter the displayed trades based on certain criteria (e.g., date range, strategy used).
+    create_trade_log(): Writes important actions (such as saving a trade) into a TXT log file.
+    calculate_win_rate(): Calculates the win rate based on the results of the trades (wins/losses).
+    calculate_average_risk_reward(): Calculates the average risk-reward ratio of trades.
+
+
+    """
+
+    def calculate_profit_loss():
+        """
+        Profit/Loss=(Exit Price−Entry Price)×Lot Size
+        """
+
+    def display_trade_history():
+        pass
+
+    def load_trades_from_csv():
+        pass
+
+    def filter_trades():
+        pass
+
+    def create_trade_log():
+        pass    
+
+    def calculate_win_rate():   
+        pass
+
+    def calculate_average_risk_reward():            
+        pass
 
     def clear_entry():
         trade_date_entry.delete(0, "end")
