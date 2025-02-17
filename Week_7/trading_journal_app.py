@@ -29,78 +29,93 @@ def csv_check():
 def main():
     root = tk.Tk()
     root.title('Trading Journal')
-    root.geometry('400x400')
+    root.geometry('500x500')
+    root.configure(bg='#16213e')
 
     main_frame = Frame(root)
     main_frame = tk.Frame(root)
     main_frame.pack(padx=10 , pady=10, fill=tk.BOTH ,expand=True)
+    main_frame.configure(bg='#16213e')
     csv_check()
     populate_ui(main_frame)
     root.mainloop()
 
 def populate_ui(main_frame):
     trade_date_label = tk.Label(main_frame, text='Trade Date')
+    trade_date_label.configure(bg='#16213e', fg='white')
     trade_date_entry = tk.Entry(main_frame)
     
     instrument_label = tk.Label(main_frame, text='Instrument')
+    instrument_label.configure(bg='#16213e', fg='white')
     instrument_entry = tk.Entry(main_frame)
 
     options= ['Long', 'Short']
     pos_variable = tk.StringVar(main_frame)
     pos_variable.set(options[0])
     position_label = tk.Label(main_frame, text='Position')
-    position_entry = ttk.Combobox(main_frame, textvariable= pos_variable,state= 'readonly', values=options)
+    position_label.configure(bg='#16213e', fg='white')
+    position_entry = ttk.Combobox(main_frame, textvariable= pos_variable,state= 'readonly', values=options, width=17)
+    position_entry.option_add('*TCombobox*Listbox.justify', 'center')
     
     entry_price_label = tk.Label(main_frame, text='Entry Price')
+    entry_price_label.configure(bg='#16213e', fg='white')
     entry_price_entry = tk.Entry(main_frame)
     
     exit_price_label = tk.Label(main_frame, text='Exit Price')
+    exit_price_label.configure(bg='#16213e', fg='white')
     exit_price_entry = tk.Entry(main_frame)
     
     stoploss_label = tk.Label(main_frame, text='Stop Loss')
+    stoploss_label.configure(bg='#16213e', fg='white')
     stoploss_entry = tk.Entry(main_frame)
     
     lotsize_label = tk.Label(main_frame, text='Lot Size')
+    lotsize_label.configure(bg='#16213e', fg='white')
     lotsize_entry = tk.Entry(main_frame)
     
     status_label = tk.Label(main_frame, text='Status')
-    status_display = tk.Label(main_frame, width=30, text="Pending")
+    status_label.configure(bg='#16213e', fg='white')
+    status_display = tk.Label(main_frame, text="Pending", width=17)
 
-    save_button = tk.Button(main_frame, text='Save')
-    clear_button = tk.Button(main_frame, text='Clear')
+    save_button = tk.Button(main_frame, text='Save Entry')
+    save_button.configure(bg='#D50032', fg='#16213e')
+    clear_button = tk.Button(main_frame, text='Clear Entry')
+    clear_button.configure(bg='#D50032', fg='#16213e')
+
 
     take_profit_label = tk.Label(main_frame, text='Take Profit')
+    take_profit_label.configure(bg='#16213e', fg='white')
     take_profit_entry = tk.Entry(main_frame)
 
 
     # Widget Placements
     trade_date_label.grid(column=0, row=0, sticky='w')
-    trade_date_entry.grid(column=1, row=0)
+    trade_date_entry.grid(column=1, row=0, columnspan=50, padx=10 , pady=10)
 
     instrument_label.grid(column=0, row=1, sticky='w')
-    instrument_entry.grid(column=1, row=1)
+    instrument_entry.grid(column=1, row=1, columnspan=50, padx=10, pady=10)
 
     
     position_label.grid(column=0, row=2, sticky='w')
-    position_entry.grid(column=1, row=2, columnspan=5)
+    position_entry.grid(column=1, row=2, padx=10, pady=10)
 
     entry_price_label.grid(column=0, row=3, sticky='w')
-    entry_price_entry.grid(column=1, row=3)
+    entry_price_entry.grid(column=1, row=3, columnspan=50, padx=10, pady=10)
 
     exit_price_label.grid(column=0, row=4, sticky='w')
-    exit_price_entry.grid(column=1, row=4)
+    exit_price_entry.grid(column=1, row=4, columnspan=50, padx=10, pady=10)
 
     stoploss_label.grid(column=0, row=5, sticky='w')
-    stoploss_entry.grid(column=1, row=5)
+    stoploss_entry.grid(column=1, row=5, columnspan=50, padx=10, pady=10)
 
     lotsize_label.grid(column=0, row=6, sticky='w')
-    lotsize_entry.grid(column=1, row=6)
+    lotsize_entry.grid(column=1, row=6, columnspan=50, padx=10, pady=10)
 
     take_profit_label.grid(column=0, row=7, sticky='w')
-    take_profit_entry.grid(column=1, row=7)
+    take_profit_entry.grid(column=1, row=7, columnspan=50, padx=10, pady=10)
 
     status_label.grid(column=0, row=8, sticky='w')
-    status_display.grid(column=1, row=8)
+    status_display.grid(column=1, row=8, columnspan=50, padx=10, pady=10)
 
     save_button.grid(column=0, row=9, padx=10, pady=10)
     clear_button.grid(column=1, row=9, padx=10, pady=10)
@@ -117,7 +132,7 @@ def populate_ui(main_frame):
             take_profit_entry_str = take_profit_entry.get()
             lotsize_entry_str = lotsize_entry.get()
 
-            entry_date = datetime.strptime(trade_date_entry_str, "%Y-%m-%d")
+            entry_date = trade_date_entry_str
             entry_price = float(entry_price_entry_str)
             exit_price = float(exit_price_entry_str)
             stoploss = float(stoploss_entry_str)
