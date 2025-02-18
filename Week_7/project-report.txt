@@ -1,0 +1,22 @@
+Second Report for a Student Chosen Project
+
+
+
+
+
+============================================================================================================
+            Time Spent
+   Date       (hours)   Description of Work
+----------  ----------  ----------------------------------------------------------------------------------
+2025-02-09      2.5     Reviewed relevant articles and videos on Youtuber on tkinter widgets
+2025-02-10      3.0     Designed project architecture; created initial diagrams and flowcharts , on paper.
+2025-02-11      4.0     Wrote experimental code to test initial design concepts to minimize time consuming workflow and increase effeciency.
+2025-02-12      3.5     Developed main project code; implemented core functionalities.
+2025-02-13      2.0     Wrote test functions to validate code; began debugging identified issues.
+2025-02-14      3.0     Continued debugging; optimized code for performance.
+2025-02-15      2.5     Started project from start, wanted to confirm if i understand the code, turns out not very much
+2025-02-16      2.5     Research on how to write test code involved with csv files 
+2025-02-18      2.5     Went back to error handling class material
+2025-02-19      2.5     Finalizing project.
+
+===========================================================================================================
