@@ -9,6 +9,11 @@ def test_calculate_win_rate_empty(tmp_path):
     csv_file.write_text(header)
     win_rate = calculate_win_rate(str(csv_file))
     assert win_rate == 0.0
+    #  Check that the returned value is of type float.
+    assert isinstance(win_rate, float)
+    # Additional Assert 2: Check that win_rate is not negative.
+    assert win_rate >= 0.0
+
 
 # Test calculate_win_rate with one win and one loss (50% win rate)
 def test_calculate_win_rate_basic(tmp_path):
@@ -19,6 +24,9 @@ def test_calculate_win_rate_basic(tmp_path):
     csv_file.write_text(header + trade1 + trade2)
     win_rate = calculate_win_rate(str(csv_file))
     assert win_rate == pytest.approx(50.0, rel=1e-2)
+    assert win_rate <= 100.0
+    assert win_rate > 0.0
+
 
 # Test calculate_average_risk_reward with one win and one loss.
 def test_calculate_average_risk_reward(tmp_path):
@@ -30,5 +38,7 @@ def test_calculate_average_risk_reward(tmp_path):
     average_rr = calculate_average_risk_reward(str(csv_file))
     # For one win (20 profit) and one loss (10 loss), average RR = 20/10 = 2.0
     assert average_rr == pytest.approx(2.0, rel=1e-2)
+    assert isinstance(average_rr, float)
+    assert average_rr > 0.0
 
 pytest.main(["-v", "--tb=line", "-rN", __file__])
